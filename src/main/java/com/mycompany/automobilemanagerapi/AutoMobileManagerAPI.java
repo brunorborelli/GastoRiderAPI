@@ -22,50 +22,50 @@ public class AutoMobileManagerAPI {
     public static void main(String[] args) {
         
                 
-    //Endereço e Credenciais do banco de dados
-    String jdbcUrl = "jdbc:postgresql://localhost:5432/autoMobileDB";
-    String username = "postgres";
-    String password = "root";
-    
-    //Caminho carga inicial e proxima carga
-    String cargaInicial = "C:\\Users\\bruno\\OneDrive\\Documentos\\NetBeansProjects\\AutoMobileManagerAPI\\src\\main\\java\\DB\\cargaInicial.sql" ;
-        
-    try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
-        System.out.println("Conexão bem-sucedida!");
-        
-        BufferedReader reader = new BufferedReader(new FileReader(cargaInicial));
-        String line;
-        StringBuilder script = new StringBuilder();
+        //Endereço e Credenciais do banco de dados
+        String jdbcUrl = "jdbc:postgresql://localhost:5432/autoMobileDB";
+        String username = "postgres";
+        String password = "root";
 
-        // Concatena cada linha em um único script SQL
-        while ((line = reader.readLine()) != null) {
-            script.append(line);
-            script.append("\n");
-        }
+        //Caminho carga inicial e proxima carga
+        String cargaInicial = "C:\\Users\\bruno\\OneDrive\\Área de Trabalho\\Tech\\Senai -ES\\2023\\Projeto Integrador\\AutomobileManagerAPI\\src\\main\\java\\DB\\cargaInicial.sql" ;
 
-        // Divide o script em várias instruções SQL separadas
-        String[] statements = script.toString().split(";");
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
+            System.out.println("Conexão bem-sucedida!");
 
-        // Executa cada instrução SQL
-        for (String sql : statements) {
-            if (!sql.trim().isEmpty()) {
-                Statement statement = connection.createStatement();
-                statement.executeUpdate(sql);
+            BufferedReader reader = new BufferedReader(new FileReader(cargaInicial));
+            String line;
+            StringBuilder script = new StringBuilder();
+
+            // Concatena cada linha em um único script SQL
+            while ((line = reader.readLine()) != null) {
+                script.append(line);
+                script.append("\n");
             }
-        }
 
-        System.out.println("Scripts executados com sucesso!");
-    } catch (SQLException e) {
-        System.out.println("Falha na conexão com o banco de dados: " + e.getMessage());
-        e.printStackTrace();
-    } catch (FileNotFoundException e) {
-        System.out.println("Arquivo de carga inicial não encontrado: " + e.getMessage());
-        e.printStackTrace();
-    } catch (IOException e) {
-        System.out.println("Falha ao ler o arquivo de carga inicial: " + e.getMessage());
-        e.printStackTrace();
+            // Divide o script em várias instruções SQL separadas
+            String[] statements = script.toString().split(";");
+
+            // Executa cada instrução SQL
+            for (String sql : statements) {
+                if (!sql.trim().isEmpty()) {
+                    Statement statement = connection.createStatement();
+                    statement.executeUpdate(sql);
+                }
+            }
+
+            System.out.println("Scripts executados com sucesso!");
+        } catch (SQLException e) {
+            System.out.println("Falha na conexão com o banco de dados: " + e.getMessage());
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            System.out.println("Arquivo de carga inicial não encontrado: " + e.getMessage());
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.out.println("Falha ao ler o arquivo de carga inicial: " + e.getMessage());
+            e.printStackTrace();
+        }
     }
-}
 }
             
             //------------------------------Start 'Hard Test Insert'-------------------------------------//
