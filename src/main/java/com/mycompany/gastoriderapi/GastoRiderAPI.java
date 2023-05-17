@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Project/Maven2/JavaApp/src/main/java/${packagePath}/${mainClassName}.java to edit this template
  */
 
-package com.mycompany.automobilemanagerapi;
+package com.mycompany.gastoriderapi;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -28,7 +28,7 @@ public class GastoRiderAPI {
         String password = "root";
 
         //Caminho carga inicial e proxima carga
-        String cargaInicial = "C:\\Users\\bruno\\OneDrive\\Área de Trabalho\\Tech\\Senai -ES\\2023\\Projeto Integrador\\AutomobileManagerAPI\\src\\main\\java\\DB\\cargaInicial.sql" ;
+        String cargaInicial = "./src/main/java/DB/cargaInicial.sql" ;
 
         try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
             System.out.println("Conexão bem-sucedida!");
