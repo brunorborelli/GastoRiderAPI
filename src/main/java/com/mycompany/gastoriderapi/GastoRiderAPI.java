@@ -5,66 +5,17 @@
 
 package com.mycompany.gastoriderapi;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+
+import static DB.DataBaseConnection.Conexao;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 
 public class GastoRiderAPI {
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         
-                
-        //Endereço e Credenciais do banco de dados
-        String jdbcUrl = "jdbc:postgresql://localhost:5432/autoMobileDB";
-        String username = "postgres";
-        String password = "root";
-
-        //Caminho carga inicial e proxima carga
-        String cargaInicial = "./src/main/java/DB/cargaInicial.sql" ;
-
-        try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
-            System.out.println("Conexão bem-sucedida!");
-
-            BufferedReader reader = new BufferedReader(new FileReader(cargaInicial));
-            String line;
-            StringBuilder script = new StringBuilder();
-
-            // Concatena cada linha em um único script SQL
-            while ((line = reader.readLine()) != null) {
-                script.append(line);
-                script.append("\n");
-            }
-
-            // Divide o script em várias instruções SQL separadas
-            String[] statements = script.toString().split(";");
-
-            // Executa cada instrução SQL
-            for (String sql : statements) {
-                if (!sql.trim().isEmpty()) {
-                    Statement statement = connection.createStatement();
-                    statement.executeUpdate(sql);
-                }
-            }
-
-            System.out.println("Scripts executados com sucesso!");
-        } catch (SQLException e) {
-            System.out.println("Falha na conexão com o banco de dados: " + e.getMessage());
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
-            System.out.println("Arquivo de carga inicial não encontrado: " + e.getMessage());
-            e.printStackTrace();
-        } catch (IOException e) {
-            System.out.println("Falha ao ler o arquivo de carga inicial: " + e.getMessage());
-            e.printStackTrace();
-        }
+            Conexao();    
+        
     }
 }
             
