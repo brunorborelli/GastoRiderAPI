@@ -7,17 +7,55 @@ package com.mycompany.gastoriderapi;
 
 
 import static DB.DataBaseConnection.Conexao;
+import com.mycompany.gastoriderapi.Controller.UsuarioController;
+import com.mycompany.gastoriderapi.DAO.UsuarioDao;
+import static com.mycompany.gastoriderapi.OperacoesIniciais.exibirMenu;
+import com.mycompany.gastoriderapi.Servico.UsuarioService;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class GastoRiderAPI {
 
 
     public static void main(String[] args) throws IOException {
         
-            Conexao();    
+        Conexao(); 
+        exibirMenu();
+  
+//        UsuarioDao usuarioDao = new UsuarioDao();
+//        UsuarioService usuarioService = new UsuarioService(usuarioDao);
+//        UsuarioController usuarioController = new UsuarioController(usuarioService);
+//        Scanner scanner = new Scanner(System.in);
+//        int opcao = 0;
+//
+//        while (opcao != 2) {
+//            System.out.println("=== Menu de Opções ===");
+//            System.out.println("1. Exibir todos os usuários");
+//            System.out.println("2. Sair");
+//            System.out.print("Digite a opção desejada: ");
+//            opcao = scanner.nextInt();
+//            scanner.nextLine(); // Limpar o buffer
+//
+//            switch (opcao) {
+//                case 1:
+//                    usuarioController.exibirUsuarios();
+//                    break;
+//                case 2:
+//                    System.out.println("Encerrando o programa.");
+//                    break;
+//                default:
+//                    System.out.println("Opção inválida. Tente novamente.");
+//                    break;
+//            }
+//        
+//        }
+//        
+//        scanner.close();
+    }
+            
         
     }
-}
+
             
             //------------------------------Start 'Hard Test Insert'-------------------------------------//
 //            String sqlInsert = "INSERT INTO carros (descricao, status) VALUES (?, ?)";;
