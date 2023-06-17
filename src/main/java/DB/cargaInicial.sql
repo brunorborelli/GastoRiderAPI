@@ -1,3 +1,14 @@
+CREATE TABLE IF NOT EXISTS Marca (
+    id SERIAL PRIMARY KEY,
+    nome VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS Modelo (
+    id SERIAL PRIMARY KEY,
+    id_marca BIGINT REFERENCES Marca(id),
+    nome VARCHAR(255)
+);
+
 CREATE TABLE IF NOT EXISTS Usuario (
     Id SERIAL PRIMARY KEY,
     CPF VARCHAR(11),
@@ -15,6 +26,33 @@ CREATE TABLE IF NOT EXISTS Usuario (
     TipoCNH VARCHAR(20)
 );
 
+CREATE TABLE IF NOT EXISTS categoria_gastos (
+  id SERIAL PRIMARY KEY,
+  tipo_gasto VARCHAR(50) NOT NULL,
+  descricao VARCHAR(100)
+);
+
+CREATE TABLE IF NOT EXISTS Carro (
+    id SERIAL PRIMARY KEY,
+    id_usuario BIGINT REFERENCES Usuario(id),
+    placa INTEGER,
+    marca BIGINT REFERENCES Marca(id),
+    modelo BIGINT REFERENCES Modelo(id),
+    descricao VARCHAR(255),
+    tipo_combustivel VARCHAR(50),
+    km_cadastrado INTEGER,
+    foto VARCHAR(255)
+);
+
+CREATE TABLE IF NOT EXISTS Gastos (
+    id SERIAL PRIMARY KEY,
+    id_categoria BIGINT REFERENCES categoria_gastos(id),
+    id_carro BIGINT REFERENCES Carro(id),
+    descricao VARCHAR(255),
+    data VARCHAR(10),
+    gasto DECIMAL(10, 2)
+);
+
 -- INSERT INTO Usuario (CPF, Nome, Sobrenome, Genero, DataNascimento, DataCadastro, Cidade, Estado, Pais, Email, Senha, CNH, TipoCNH)
 -- VALUES
 --     ('12345678901', 'João', 'Silva', 'Masculino', '1990-01-01', '2023-06-11', 'São Paulo', 'SP', 'Brasil', 'joao.silva@example.com', 'senha123', '123456789', 'B'),
@@ -22,11 +60,6 @@ CREATE TABLE IF NOT EXISTS Usuario (
 --     ('54321678901', 'Pedro', 'Ferreira', 'Masculino', '1995-12-10', '2023-06-11', 'Belo Horizonte', 'MG', 'Brasil', 'pedro.ferreira@example.com', 'senha789', '543216789', 'A');
 
 
-CREATE TABLE IF NOT EXISTS categoria_gastos (
-  id SERIAL PRIMARY KEY,
-  tipo_gasto VARCHAR(50) NOT NULL,
-  descricao VARCHAR(100)
-);
 
 -- INSERT INTO categoria_gastos (tipo_gasto, descricao)
 -- VALUES
@@ -42,17 +75,6 @@ CREATE TABLE IF NOT EXISTS categoria_gastos (
 --   ('Licenciamento', 'Custos de licenciamento');
 
 
-CREATE TABLE IF NOT EXISTS Carro (
-    id SERIAL PRIMARY KEY,
-    id_usuario BIGINT REFERENCES Usuario(id),
-    placa INTEGER,
-    marca BIGINT REFERENCES Marca(id),
-    modelo BIGINT REFERENCES Modelo(id),
-    descricao VARCHAR(255),
-    tipo_combustivel VARCHAR(50),
-    km_cadastrado INTEGER,
-    foto VARCHAR(255)
-);
 
 -- INSERT INTO Carro (id_usuario, placa, marca, modelo, descricao, tipo_combustivel, km_cadastrado, foto)
 -- VALUES (1, 1234, 1, 1, 'Fusca 1970', 'Gasolina', 100000, 'fusca.jpg');
@@ -60,14 +82,7 @@ CREATE TABLE IF NOT EXISTS Carro (
 -- INSERT INTO Carro (id_usuario, placa, marca, modelo, descricao, tipo_combustivel, km_cadastrado, foto)
 -- VALUES (1, 5678, 2, 2, 'Opala 1980', 'Álcool', 150000, 'opala.jpg');
 
-CREATE TABLE IF NOT EXISTS Gastos (
-    id SERIAL PRIMARY KEY,
-    id_categoria BIGINT REFERENCES Categoria_Gastos(id),
-    id_carro BIGINT REFERENCES Carro(id),
-    descricao VARCHAR(255),
-    data VARCHAR(10),
-    gasto DECIMAL(10, 2)
-);
+
 
 -- INSERT INTO Gastos (id_categoria, id_carro, descricao, data, gasto)
 -- VALUES (1, 1, 'Troca de óleo', '2023-06-01', 50.00);
@@ -100,10 +115,6 @@ CREATE TABLE IF NOT EXISTS Gastos (
 -- VALUES (2, 1, 'Limpeza interna', '2023-06-10', 30.00);
 
 
-CREATE TABLE IF NOT EXISTS  Marca (
-    id SERIAL PRIMARY KEY,
-    nome VARCHAR(255)
-);
 
 -- INSERT INTO Marca (nome)
 -- VALUES ('Volkswagen');
@@ -135,13 +146,6 @@ CREATE TABLE IF NOT EXISTS  Marca (
 -- INSERT INTO Marca (nome)
 -- VALUES ('Mercedes-Benz');
 
-
-
-CREATE TABLE IF NOT EXISTS  Modelo (
-    id SERIAL PRIMARY KEY,
-    id_marca BIGINT REFERENCES Marca(id),
-    nome VARCHAR(255)
-);
 
 
 -- INSERT INTO Modelo (id_marca, nome)
